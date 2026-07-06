@@ -20,7 +20,7 @@
  *  - hashing and upload/download run through a small concurrency pool.
  */
 
-import { App, DataAdapter, normalizePath } from "obsidian";
+import { App, DataAdapter, Platform, normalizePath } from "obsidian";
 import { YandexDisk } from "./yandex";
 import { sha256Hex } from "./hash";
 import { Excluder } from "./exclude";
@@ -95,9 +95,14 @@ const BULK_DELETE_MIN = 20;
 /** …and only when they're this fraction of everything we know about. */
 const BULK_DELETE_FRACTION = 0.3;
 
-/** Concurrency for network operations and for local hashing. */
-const NET_CONCURRENCY = 6;
-const HASH_CONCURRENCY = 8;
+/**
+ * Concurrency for network ops and local hashing. Every in-flight transfer
+ * holds a whole file in memory (requestUrl has no streaming), so on mobile —
+ * where memory is tight and a native OOM crashes the whole app — we go one at
+ * a time. A vault with 40–56 MB audio files would otherwise blow up.
+ */
+const NET_CONCURRENCY = Platform.isMobile ? 1 : 6;
+const HASH_CONCURRENCY = Platform.isMobile ? 2 : 8;
 
 /** Re-walk the remote at least this often even if the revision looks unchanged,
  * so a write masked during an earlier run can't hide forever. */
