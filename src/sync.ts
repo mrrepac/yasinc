@@ -305,6 +305,10 @@ export class SyncEngine {
         stats.errors.push(`${op.type} ${op.path}: ${errMsg(e)}`);
       }
       done++;
+      // On mobile, yield so the WebView can GC the file buffer (and the base64
+      // copy Capacitor makes) before the next one — otherwise memory piles up
+      // over a few dozen files and the app is killed.
+      if (Platform.isMobile) await sleepMs(50);
       if (done % 25 === 0) void this.saveSnapshot();
     });
 
@@ -470,6 +474,7 @@ export class SyncEngine {
         stats.errors.push(`${op.type} ${op.path}: ${errMsg(e)}`);
       }
       done++;
+      if (Platform.isMobile) await sleepMs(50);
     }
 
     // Refresh the revision baseline after our own writes.
