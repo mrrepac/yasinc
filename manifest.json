@@ -1,0 +1,10 @@
+{
+  "id": "yasinc",
+  "name": "yasinc",
+  "version": "0.3.4",
+  "minAppVersion": "1.7.2",
+  "description": "Two-way vault synchronization with Yandex Disk over its REST API: manual and automatic sync, sha256-based diff, safe conflict copies and trash-based deletions.",
+  "author": "mrrepac",
+  "authorUrl": "https://github.com/mrrepac",
+  "isDesktopOnly": false
+}

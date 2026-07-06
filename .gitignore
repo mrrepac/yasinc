@@ -1,0 +1,6 @@
+node_modules/
+main.js
+data.json
+sync-state.json
+hash-cache.json
+*.map

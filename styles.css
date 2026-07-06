@@ -1,0 +1,110 @@
+/* yasinc — Yandex Disk sync */
+
+.yasinc-status {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Traffic-light dot */
+.yasinc-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.yasinc-dot.is-green {
+  background: var(--color-green, #7bc27a);
+}
+
+.yasinc-dot.is-yellow {
+  background: var(--color-yellow, #e0b153);
+}
+
+.yasinc-dot.is-orange {
+  background: var(--color-orange, #e8873a);
+}
+
+.yasinc-dot.is-red {
+  background: var(--color-red, #e05252);
+}
+
+.yasinc-dot.is-gray {
+  background: var(--text-faint);
+}
+
+/* Spinner glyph while a sync is running */
+.yasinc-busy {
+  display: inline-block;
+  color: var(--text-accent);
+  animation: yasinc-spin 1s linear infinite;
+}
+
+/* Spinning ribbon icon while a sync is running */
+.yasinc-spin svg {
+  animation: yasinc-spin 1s linear infinite;
+}
+
+@keyframes yasinc-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Settings */
+.yasinc-token-status {
+  font-size: var(--font-ui-smaller);
+  margin-top: 0.25em;
+}
+
+.yasinc-token-status.is-ok {
+  color: var(--text-success);
+}
+
+.yasinc-token-status.is-bad {
+  color: var(--text-error);
+}
+
+.yasinc-setting-mono textarea {
+  font-family: var(--font-monospace);
+  width: 100%;
+  min-height: 6em;
+}
+
+.yasinc-hint {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+/* Onboarding guide */
+.yasinc-setup {
+  border-left: 2px solid var(--background-modifier-border);
+  padding-left: 12px;
+  margin: 4px 0 12px 4px;
+}
+
+.yasinc-setup .setting-item {
+  border-top: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Sync log modal */
+.yasinc-log {
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  max-height: 60vh;
+  overflow: auto;
+  user-select: text;
+}
+
+.yasinc-log > div {
+  white-space: nowrap;
+}
+
+.yasinc-log-errors {
+  color: var(--text-error);
+  margin-bottom: 0.5em;
+  user-select: text;
+}
